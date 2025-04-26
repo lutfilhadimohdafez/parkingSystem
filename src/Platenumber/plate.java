@@ -16,10 +16,10 @@ public class plate {
         JLayeredPane plateLayer = new JLayeredPane();
         plateLayer.setPreferredSize(new Dimension(500, 300));
         plate.setTitle("Plate Number");
-        plate.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         plate.setLocationRelativeTo(null);
         plate.setSize(500,500);
         plate.setVisible(true);
+        plate.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 
         JLabel PlateLabel = new JLabel("Enter Your Plate Number:");
@@ -48,6 +48,10 @@ public class plate {
         // jangan lupa code for main menu back button
         JButton back = new JButton("Back");
         back.setBounds(200, 150, 100, 30);
+        back.addActionListener(e -> {
+            plate.dispose(); 
+            
+        });
 
         
 
