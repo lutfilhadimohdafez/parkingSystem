@@ -2,12 +2,15 @@ package Platenumber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class plate {
 
-
+    
     public plate() {
+        
         JFrame plate = new JFrame();
         plate.setResizable(false);
         JLayeredPane plateLayer = new JLayeredPane();
@@ -29,8 +32,17 @@ public class plate {
         submitButton.setBounds(200, 100, 100, 30);
         submitButton.addActionListener(e -> {
             String PlateID = textPlate.getText();
-            System.out.println("Plate Number: " + PlateID);
             JOptionPane.showConfirmDialog(null, "Do you confirm your plate is " + PlateID, "Confirmation", JOptionPane.YES_NO_OPTION);
+            
+            String csvFile = "src/Database/plate.csv";
+            try (FileWriter PlateWriter = new FileWriter(csvFile, true)) {
+            PlateWriter.append(PlateID).append("\n");
+            System.out.println("Data saved to " + csvFile);
+            } catch (IOException PlateException) {
+            System.out.println("An error occurred while writing to the file.");
+            PlateException.printStackTrace();
+            }
+            
         });
 
         // jangan lupa code for main menu back button
