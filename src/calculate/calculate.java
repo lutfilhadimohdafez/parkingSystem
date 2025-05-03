@@ -26,7 +26,7 @@ public class calculate extends ToolsforCSV {
     public void calculatePlateNumber(){
 
         //below troubleshoot
-        //readCSVfile(calcFilePath);
+        readCSVfile(calcFilePath);
 
         
     }

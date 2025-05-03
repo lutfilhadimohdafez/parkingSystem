@@ -24,12 +24,11 @@ public class MainMenu extends JFrame {
         mainPanel = new JPanel(cardLayout);
 
         createMenuPanel();
-        createParkingPanel();
-        createCSVFile();
+
 
         mainPanel.add(menuPanel, "Menu");
-        mainPanel.add(parkingPanel, "Parking");
-        mainPanel.add(csvFilePanel, "CSVfile");
+        //mainPanel.add(parkingPanel, "Parking");
+        //mainPanel.add(csvFilePanel, "CSVfile");
 
         add(mainPanel);
         cardLayout.show(mainPanel, "Menu");
@@ -46,11 +45,7 @@ public class MainMenu extends JFrame {
         JButton calculateBtn = new JButton("Calculate your car plate");
         JButton exitBtn = new JButton("Exit");
 
-        // filepath
-
-        // absolute path on another file folder below
-        // final String filepathCSV =
-        // "C:\\Users\\USER\\Documents\\db_test_java\\db.csv";
+       
 
         final String filepathCSV = "local_db\\db.csv";
 
@@ -77,35 +72,6 @@ public class MainMenu extends JFrame {
         menuPanel.add(exitBtn);
     }
 
-    private void createParkingPanel() {
-        parkingPanel = new JPanel();
-        parkingPanel.setLayout(new BorderLayout());
-
-        JLabel label = new JLabel("Parking System Panel", SwingConstants.CENTER);
-        JTextField plateInput = new JTextField();
-        JButton backBtn = new JButton("Back to Menu");
-
-        backBtn.addActionListener(e -> cardLayout.show(mainPanel, "Menu"));
-
-        parkingPanel.add(label, BorderLayout.NORTH);
-        parkingPanel.add(plateInput, BorderLayout.CENTER);
-        parkingPanel.add(backBtn, BorderLayout.SOUTH);
-    }
-
-    private void createCSVFile() {
-        csvFilePanel = new JPanel();
-        csvFilePanel.setLayout(new BorderLayout());
-
-        JLabel labelcsvfile = new JLabel("CSVFilePanel", SwingConstants.CENTER);
-        JTextField csvFileInput = new JTextField();
-        JButton backBtncsv = new JButton("Back to Menu");
-
-        backBtncsv.addActionListener(e -> cardLayout.show(mainPanel, "Menu"));
-
-        csvFilePanel.add(labelcsvfile, BorderLayout.NORTH);
-        csvFilePanel.add(csvFileInput, BorderLayout.CENTER);
-        csvFilePanel.add(backBtncsv, BorderLayout.SOUTH);
-    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MainMenu());
