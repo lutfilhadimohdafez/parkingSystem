@@ -2,7 +2,7 @@ package Platenumber;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
+import java.io.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -39,7 +39,7 @@ public class plate {
             // bawah ni untuk check for file if ada or not
             // File directory = new File("src/Database");
             // if (!directory.exists()) {
-            //     directory.mkdirs(); 
+            // directory.mkdirs();
             // }
 
             try (FileWriter PlateWriter = new FileWriter(csvFile, true)) {
