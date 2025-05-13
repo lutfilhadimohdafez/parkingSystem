@@ -1,8 +1,4 @@
-name, rollno, department, result, cgpa
-amar, 42, cse, pass, 8.6
-rohini, 21, ece, fail, 3.2
-aman, 23, cse, pass, 8.9
-rahul, 45, ee, fail, 4.6
-pratik, 65, cse, pass, 7.2
-raunak, 23, me, pass, 9.1
-suvam, 68, me, pass, 8.2
+time,malaysianplatenumber,in/out status,payment_status
+
+2024-05-14 06:49:50,NEA1673,in,
+2025-05-14 06:51:00,NEA1673,out,PENDING
