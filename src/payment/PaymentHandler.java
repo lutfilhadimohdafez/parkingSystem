@@ -1,5 +1,8 @@
 package payment;
 
+import javax.swing.*;
+
+import java.awt.Image;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -34,4 +37,29 @@ public class PaymentHandler {
             // Handle the error appropriately in a real application.
         }
     }
+
+    public void showPaymentConfirmationImage() {
+        // Create a new JFrame with fixed size
+        JFrame imageFrame = new JFrame("Payment Confirmation");
+        imageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        int width = 400;
+        int height = 300;
+        imageFrame.setSize(width, height);
+        imageFrame.setLocationRelativeTo(null);
+    
+        // Load the image
+        ImageIcon originalIcon = new ImageIcon("resources/payment_confirm.png"); // Update with your image path
+    
+        // Scale the image to fit the window size
+        Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel imageLabel = new JLabel(scaledIcon);
+    
+        // Add the label to the frame
+        imageFrame.getContentPane().add(imageLabel);
+    
+        imageFrame.setVisible(true);
+    }
+    
 }
+

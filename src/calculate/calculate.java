@@ -24,20 +24,16 @@ public class calculate extends ToolsforCSV {
         List<String[]> results = new ArrayList<>();
         Map<String, LocalDateTime> entryTimes = new HashMap<>();
         Map<String, LocalDateTime> exitTimes = new HashMap<>();
-        Map<String, String> paymentStatuses = new HashMap<>();
         List<String[]> paymentRecords = readPaymentData(PAYMENT_FILE_PATH);
-
-        // Add header for the results
-        //results.add(new String[]{"Plate Number", "Fee (RM)", "Payment Status"});
-
-        // First pass: Collect entry and exit times
+    
+        // First pass: Collect the *latest* entry and exit times for each plate
         for (int i = 1; i < dbcsvList.size(); i++) {
             if (dbcsvList.get(i).length >= 3) {
                 String timeStr = dbcsvList.get(i)[0];
                 String plateNumber = dbcsvList.get(i)[1];
                 String status = dbcsvList.get(i)[2];
                 LocalDateTime timestamp = LocalDateTime.parse(timeStr, FORMATTER);
-
+    
                 if (status.equalsIgnoreCase("in")) {
                     entryTimes.put(plateNumber, timestamp);
                 } else if (status.equalsIgnoreCase("out")) {
@@ -45,7 +41,7 @@ public class calculate extends ToolsforCSV {
                 }
             }
         }
-
+    
         // Second pass: Calculate fees and determine payment status for exited vehicles
         for (Map.Entry<String, LocalDateTime> exitEntry : exitTimes.entrySet()) {
             String plate = exitEntry.getKey();
@@ -57,11 +53,11 @@ public class calculate extends ToolsforCSV {
                 results.add(new String[]{plate, String.format("%.2f", fee), paymentStatus});
                 entryTimes.remove(plate); // Remove processed entry
             } else {
-                 results.add(new String[]{"Warning", "Exit without entry for: " + plate, "N/A", "NOT PAID"});
+                results.add(new String[]{"Warning", "Exit without entry for: " + plate, "N/A", "NOT PAID"});
             }
         }
-
-        // Handle ongoing parking
+    
+        // Handle ongoing parking (those with an 'in' but no corresponding 'out')
         for (Map.Entry<String, LocalDateTime> entry : entryTimes.entrySet()) {
             String plate = entry.getKey();
             LocalDateTime entryTime = entry.getValue();
@@ -69,10 +65,9 @@ public class calculate extends ToolsforCSV {
             double fee = calculateParkingFee(entryTime, now);
             results.add(new String[]{"Warning", "Still parked: " + plate, String.format("%.2f", fee) + " (estimated)", "PENDING"});
         }
-
+    
         return results;
     }
-
     // Helper method to read payment data from payments.csv
     private List<String[]> readPaymentData(String filePath) {
         List<String[]> payments = new ArrayList<>();
